@@ -1,26 +1,56 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import MainPage from "../views/MainPage.vue";
+import LoginComponent from "@/components/LoginComponent.vue";
+import RegComponent from "@/components/RegComponent.vue";
+import store from '@/store'
+import AccauntComponent from "@/components/AccauntComponent.vue";
+import AddAppComponent from "@/components/AddAppComponent.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: MainPage,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path:"/login",
+    name:"login",
+    component:LoginComponent
   },
+  {
+    path:"/register",
+    name:"register",
+    component:RegComponent
+  },
+  {
+    path:"/account",
+    name:"account",
+    component:AccauntComponent
+  },
+  {
+    path:"/addApplication",
+    name:"addApplication",
+    component:AddAppComponent
+  },
+
+
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  mode: 'history',
   routes,
 });
 
+router.beforeEach(async(to)=>{if(to.meta?.requiedAuth)
+  {
+    var isAuth = store.state.auth.user
+    if(!isAuth) isAuth = await store.dispatch('auth/logInWithCredentials')
+      if(!isAuth){
+        return{
+          name:"login"
+        }
+      }
+  }
+})
 export default router;
