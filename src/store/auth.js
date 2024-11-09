@@ -1,4 +1,4 @@
-import { auth } from "@/firebase-config";
+import { auth } from "@/firebase-config.js";
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, onAuthStateChanged, browserLocalPersistence, setPersistence } from "firebase/auth";
 

@@ -11,6 +11,7 @@
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "bootstrap": "^5.3.3",
     "core-js": "^3.8.3",
+    "dotenv": "^16.4.5",
     "firebase": "^11.0.1",
     "normalize.css": "^8.0.1",
     "vue": "^3.2.13",
